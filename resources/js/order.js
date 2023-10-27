@@ -1,87 +1,143 @@
+document.addEventListener('DOMContentLoaded', function () {
+  let additionalCostPerPhoto = 0
+  let selectedAdditionalCostPerPhoto = 0
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const fileInputs = document.querySelectorAll('input.pservice-upload[type="file"]');
+  const serviceRows = document.querySelectorAll('.service_row')
 
-            // دالة لحساب المجموع
-            const sum = arr => arr.reduce((acc, val) => acc + val, 0);
+  serviceRows.forEach(function (row) {
+    let serviceName = row.dataset.serviceName
 
-            // دالة لتنفيذ أي إجراء عند التحديث
-            const onUpdate = () => {
-                // إضافة أي إجراء تحتاجه هنا
-                console.log('تم تحديث البيانات!');
-            };
+    const fileInputs = row.querySelectorAll(
+      'input.photo-upload-input[type="file"]'
+    )
 
-            fileInputs.forEach(input => {
-                input.addEventListener('change', function () {
-                    const selectedFiles = input.files;
-                    const numberOfSelectedFiles = selectedFiles.length;
-                    const serviceName = input.getAttribute('data-service-name');
+    // Upload photos and show it in preview with delete button
+    fileInputs.forEach((input) => {
+      input.addEventListener('change', function () {
+        const selectedFiles = this.files
 
-                    document.getElementById('selected-files-count').value = numberOfSelectedFiles;
+        const previewContainer = this.parentNode.querySelector(
+          '.imgs_preview_container'
+        )
 
-                    const rows = document.querySelectorAll('.services-summary .table-row');
-                    let grandTotal = 0;
+        for (let i = 0; i < selectedFiles.length; i++) {
+          const file = selectedFiles[i]
+          const reader = new FileReader()
+          reader.onload = function (e) {
+            const imgElement = new Image()
+            imgElement.onload = function () {
+              const canvas = document.createElement('canvas')
+              const ctx = canvas.getContext('2d')
+              canvas.width = 100
+              canvas.height = 100
+              ctx.drawImage(imgElement, 0, 0, 100, 100)
+              const resizedDataUrl = canvas.toDataURL()
 
-                    rows.forEach(row => {
-                        const selectService = row.querySelector('.selectService');
+              const previewImgContainer = document.createElement('div')
+              previewImgContainer.classList.add('preview-image-container')
 
-                        if (selectService && selectService.textContent.trim() === serviceName) {
-                            const photosNoElement = row.querySelector('.photos-no');
-                            const imageCostElement = row.querySelector('.image-cost');
-                            const servicePriceElement = row.querySelector('.service-price');
+              const previewImgElement = document.createElement('img')
+              previewImgElement.src = resizedDataUrl
+              previewImgContainer.appendChild(previewImgElement)
 
-                            if (photosNoElement && imageCostElement && servicePriceElement) {
-                                const imageCost = parseFloat(imageCostElement.textContent.replace('$', ''));
-                                const servicePrice = imageCost * numberOfSelectedFiles;
+              const deleteButton = document.createElement('button')
+              deleteButton.classList.add('delete-button')
+              deleteButton.innerHTML = 'x'
+              deleteButton.addEventListener('click', function () {
+                previewImgContainer.remove()
+                updatePhotosCount(serviceName)
+              })
+              previewImgContainer.appendChild(deleteButton)
 
-                                photosNoElement.textContent = numberOfSelectedFiles;
-                                servicePriceElement.textContent = '$' + servicePrice.toFixed(2);
+              previewContainer.appendChild(previewImgContainer)
 
-                                grandTotal += servicePrice;
-                            }
-                        }
-                    });
+              updatePhotosCount(serviceName)
+            }
+            imgElement.src = e.target.result
+          }
+          reader.readAsDataURL(file)
+        }
 
-                    const grandTotalElement = document.querySelector('#pservice-price');
+        updatePhotosCost()
+        updateCostDependOnSelectedTime(serviceName)
+      })
+    })
+  })
 
-                    if (grandTotalElement) {
-                        const currentTotal = parseFloat(grandTotalElement.getAttribute('data-service-total')) || 0;
-                        const newTotal = currentTotal + grandTotal;
+  function updatePhotosCount(serviceName) {
+    const previewImgContainer = document.querySelector(
+      `.basic-photos-cont .${serviceName}_photos_container`
+    )
+    const countInput = document.querySelector('.uploaded-photos-count')
 
-                        grandTotalElement.textContent = '$' + newTotal.toFixed(2);
-                        grandTotalElement.setAttribute('data-service-total', newTotal.toFixed(2));
-                        onUpdate();
-                    }
+    let photosCount = previewImgContainer.childNodes.length
 
-                    // تنفيذ الإجراء عند حدوث أي تحديث
+    if (countInput) {
+      countInput.value = photosCount
+      document.querySelector(`.${serviceName}-photos-no`).innerHTML =
+        photosCount
 
-                });
-            });
-        });
+      updatePhotosCost()
+    }
+  }
 
+  function updatePhotosCost() {
+    let grandTotal = 0
 
+    const grandTotalElement = document.getElementById('total-price')
 
+    document.querySelectorAll('.selectedService').forEach(function (service) {
+      const serviceName = service.getAttribute('data-service-name')
 
+      const numPhotos = parseInt(
+        document.querySelector(`.${serviceName}-photos-no`).textContent,
+        10
+      )
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const fileInputs = document.querySelectorAll('input.pservice-upload[type="file"]');
-            fileInputs.forEach(function (input) {
-                input.addEventListener('change', function () {
-                    const selectedFiles = input.files;
-                    const serviceName = input.getAttribute('data-service-name');
-                    const previewContainer = input.classList.contains('ref_pservice_upload') ? input.parentNode.querySelector('.refs_img_preview') : input.parentNode.querySelector('.basic_img_preview');
-                    previewContainer.innerHTML = '';
+      const photoCost = parseFloat(service.dataset.servicePrice)
 
-                    for (let i = 0; i < selectedFiles.length; i++) {
-                        const file = selectedFiles[i];
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            const imgElement = document.createElement('img');
-                            imgElement.src = e.target.result;
-                            previewContainer.appendChild(imgElement);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            });
-        });
+      const additionalCostElement = document.querySelector(
+        `.${serviceName}-additional-cost`
+      )
+      
+      let additionalCostPerPhoto = parseFloat(
+        additionalCostElement.dataset.additionalCost
+      )
+
+      let servicePrice = numPhotos * (photoCost + additionalCostPerPhoto)
+
+      const servicePriceElement = document.getElementById(
+        `service-price-${serviceName}`
+      )
+      servicePriceElement.innerHTML = servicePrice.toFixed(2) + ' $'
+
+      grandTotal += servicePrice
+    })
+
+    grandTotalElement.textContent = grandTotal.toFixed(2) + ' $'
+  }
+
+  function updateCostDependOnSelectedTime(serviceName) {
+    const selectTurnaroundTime = document.querySelector(
+      `.${serviceName}_service_time`
+    )
+
+    selectTurnaroundTime.addEventListener('change', function () {
+      const selectedOption = this.options[this.selectedIndex]
+      selectedAdditionalCostPerPhoto = parseFloat(
+        selectedOption.dataset.selectedAdditionalCost
+      )
+
+      const additionalCostElement = document.querySelector(
+        `.${serviceName}-additional-cost`
+      )
+
+      additionalCostElement.innerHTML = `${selectedOption.textContent} (${selectedAdditionalCostPerPhoto} $)`
+
+      additionalCostElement.dataset.additionalCost =
+        selectedAdditionalCostPerPhoto
+
+      updatePhotosCost()
+    })
+  }
+})

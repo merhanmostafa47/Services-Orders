@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="resources/css/jam.min.css" />
     <link rel="stylesheet" href="resources/css/app.css" />
     <link rel="stylesheet" href="resources/css/main.css" />
+    <link rel="stylesheet" href="resources/css/order.css" />
   </head>
   <body>
     <!-- Start Navbar -->
@@ -243,163 +244,335 @@
                 </div>
               </div>
               <!-- End Modal -->
-              <!-- Start Table -->
-              <table class="w-100 services-summary mt-3 table d-table">
-                <tr class="head">
-                  <td width="40%">Selected Services</td>
-                  <td width="20%">Cost/Photo</td>
-                  <td width="20%">No. of Photo(s)</td>
-                  <td width="20%">Service(s) Cost</td>
-                </tr>
-                <tr
-                  class="table-row"
-                  style="display: table-row"
-                  id="service-row-1"
-                >
-                  <td
-                    class="selectService"
-                    class="text-left"
-                    width="40%"
-                    data-service-name="{{ $service->name }}"
+              <form>
+                <!-- Start Table -->
+                <table class="w-100 services-summary mt-3 table d-table">
+                  <tr class="head">
+                    <td width="20%">Selected Services</td>
+                    <td width="20%">Cost/Photo</td>
+                    <td width="20%">No. of Photo(s)</td>
+                    <td width="20%">Turnaround Time</td>
+                    <td width="20%">Service(s) Cost</td>
+                  </tr>
+                  <tr
+                    class="table-row"
+                    style="display: table-row"
+                    id="service-row-basic"
                   >
-                    Basic
-                  </td>
-                  <td class="image-cost" width="20%">$50</td>
-                  <!-- سعر الخدمه -->
-
-                  <td
-                    class="photos-no"
-                    width="20%"
-                    data-service-name="basic"
-                    id="photos-no-basic"
-                  ></td>
-                  <!-- عدد الصور -->
-                  <td
-                    class="service-price"
-                    width="20%"
-                    data-service-name="basic"
-                    id="service-price-basic"
-                  ></td>
-                  <!-- تكلفة الخدمه -->
-                </tr>
-
-                <tr class="head">
-                  <td colspan="3">Grand Total</td>
-                  <td
-                    colspan="1"
-                    id="pservice-price"
-                    class="pservice-price"
-                    data-service-total=""
-                  ></td>
-                </tr>
-              </table>
-              <!-- End Table -->
-
-              <!-- Service Table -->
-              <div class="service_media_details">
-                <div class="order-service active" id="basic-cont">
-                  <input type="hidden" name="service_id[]" value="1" />
-                  <div class="order-service-head">
-                    <span>
-                      <span class="head-service-title">Basic</span>
-                      <span class="badge badge-light ml-2"> $50/Photo</span>
-                    </span>
-                    <a
-                      href="#"
-                      class="float-right selection"
-                      data-li="3"
-                      data-parent="basic-cont"
+                    <td
+                      class="selectedService basic_selected_service"
+                      class="text-left"
+                      width="20%"
+                      data-service-name="basic"
+                      data-service-price="50"
                     >
-                      <i class="jam jam-trash mr-1"></i>
-                      Delete <span>Service</span>
-                    </a>
-                  </div>
-                  <div class="order-service-body p-3">
-                    <div class="row">
-                      <div class="col-12 col-md-7">
-                        <div class="photos-cont basic-photos-cont">
-                          <input
-                            class="pservice-upload"
-                            data-service-name="basic"
-                            type="file"
-                            id="{{ $service->name }}"
-                            data-service="1"
-                            name="basic_img"
-                            multiple
-                          />
-                          <div class="photos-bg">
-                            Drop your Photos here
-                            <div>Drag one set per time</div>
+                      Basic
+                    </td>
+
+                    <!-- service cost -->
+                    <td class="image-cost" width="20%">$50</td>
+
+                    <!-- photos count -->
+                    <td
+                      class="basic-photos-no"
+                      width="20%"
+                      data-service-name="basic"
+                    >
+                      0
+                    </td>
+
+                    <!-- additional cost per photo -->
+                    <td
+                      class="basic-additional-cost"
+                      width="20%"
+                      data-additional-cost="0"
+                    >
+                      -
+                    </td>
+
+                    <!--  total photos cost  -->
+                    <td
+                      class="service-price"
+                      width="20%"
+                      id="service-price-basic"
+                    ></td>
+                  </tr>
+
+                  <tr
+                    class="table-row"
+                    style="display: table-row"
+                    id="service-row-advanced"
+                  >
+                    <td
+                      class="selectedService advanced_selected_service"
+                      class="text-left"
+                      width="20%"
+                      data-service-name="advanced"
+                      data-service-price="100"
+                    >
+                      Advanced
+                    </td>
+
+                    <!-- service cost -->
+                    <td class="image-cost" width="20%">$100</td>
+
+                    <!-- photos count -->
+                    <td
+                      class="advanced-photos-no"
+                      width="20%"
+                      data-service-name="advanced"
+                    >
+                      0
+                    </td>
+
+                    <!-- additional cost per photo -->
+                    <td
+                      class="advanced-additional-cost"
+                      width="20%"
+                      data-additional-cost="0"
+                    >
+                      -
+                    </td>
+
+                    <!--  total photos cost  -->
+                    <td
+                      class="service-price"
+                      width="20%"
+                      id="service-price-advanced"
+                    ></td>
+                  </tr>
+
+                  <tr class="head">
+                    <td colspan="4">Grand Total</td>
+                    <td colspan="1" id="total-price" class="total-price"></td>
+                  </tr>
+                </table>
+                <!-- End Table -->
+
+                <!-- Service Table -->
+                <div class="service_media_details">
+                  <div class="order-service active" id="basic-cont">
+                    <input type="hidden" name="service_id[]" value="1" />
+                    <div class="order-service-head">
+                      <span>
+                        <span class="head-service-title">Basic</span>
+                        <span class="badge badge-light ml-2"> $50/Photo</span>
+                      </span>
+
+                      <a
+                        href="#"
+                        class="float-right selection"
+                        data-li="3"
+                        data-parent="basic-cont"
+                      >
+                        <i class="jam jam-trash mr-1"></i>
+                        Delete <span>Service</span>
+                      </a>
+                    </div>
+                    <div class="order-service-body p-3">
+                      <div class="row service_row" data-service-name="basic">
+                        <div class="col-md-6 col-sm-12">
+                          <div class="photos-cont basic-photos-cont">
+                            <input
+                              class="photo-upload-input"
+                              data-service-name="basic"
+                              type="file"
+                              id="basic"
+                              data-service="1"
+                              name="basic_img"
+                              multiple
+                              required
+                            />
+                            <div class="photos-bg">
+                              Drop your Photos here
+                              <div>Drag one set per time</div>
+                            </div>
+                            <div
+                              class="imgs_preview_container basic_photos_container"
+                            ></div>
                           </div>
-                          <div class="basic_img_preview"></div>
-                        </div>
-                        <div class="photos-cont services-refs-cont">
-                          <input
-                            class="pservice-upload ref_pservice_upload"
-                            id="basic"
-                            type="file"
-                            data-service="1"
-                            name="refs_img[]"
-                            multiple
-                          />
-                          <div class="photos-bg">
-                            Drop your References here (optional)
-                            <div>Drag one set per time</div>
+
+                          <div class="photos-cont services-refs-cont">
+                            <input
+                              class="photo-upload-input service_upload"
+                              id="basic"
+                              type="file"
+                              data-service="1"
+                              name="refs_img[]"
+                              multiple
+                            />
+                            <div class="photos-bg">
+                              Drop your References here (optional)
+                              <div>Drag one set per time</div>
+                            </div>
+                            <div class="imgs_preview_container"></div>
                           </div>
-                          <div class="refs_img_preview"></div>
                         </div>
-                      </div>
-                      <input
-                        type="hidden"
-                        id="selected-files-count"
-                        name="selected_files_count"
-                        value=""
-                      />
-                      <div class="col-12 col-md-5">
-                        <textarea
-                          name="notes[]"
-                          id="basic-ins"
-                          placeholder="Describe your requests briefly and in detail only according to the selected service."
-                        ></textarea>
-                      </div>
-                      <div class="col-12 col-md-7"></div>
-                      <div class="col-12 col-md-5">
-                        <div class="p-1 form-group">
-                          <select
-                            name="order_service_time_id[]"
-                            class="form-control"
-                          >
-                            <option selected disabled>
-                              Select Turnaround Time...
-                            </option>
-                            <option value="">for 24 hour</option>
-                            <option value="">for 48 hour</option>
-                          </select>
+
+                        <div class="col-md-6 col-sm-12">
+                          <textarea
+                            name="notes[]"
+                            id="basic-ins"
+                            placeholder="Describe your requests briefly and in detail only according to the selected service."
+                            required
+                          ></textarea>
+
+                          <div class="p-1 form-group">
+                            <select
+                              name="basic_service_time"
+                              class="form-control basic_service_time"
+                              data-main-time-cost="2"
+                            >
+                              <option selected disabled>
+                                Select Turnaround Time...
+                              </option>
+                              <option
+                                value="24"
+                                data-selected-additional-cost="4"
+                              >
+                                for 24 hour
+                              </option>
+                              <option
+                                value="48"
+                                data-selected-additional-cost="2"
+                              >
+                                for 48 hour
+                              </option>
+                            </select>
+                          </div>
+
+                          <input
+                            type="hidden"
+                            name="basic_files_count"
+                            class="uploaded-photos-count"
+                          />
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  <div class="order-service active" id="advanced-cont">
+                    <input type="hidden" name="service_id[]" value="1" />
+                    <div class="order-service-head">
+                      <span>
+                        <span class="head-service-title">Basic</span>
+                        <span class="badge badge-light ml-2"> $50/Photo</span>
+                      </span>
+
+                      <a
+                        href="#"
+                        class="float-right selection"
+                        data-li="3"
+                        data-parent="basic-cont"
+                      >
+                        <i class="jam jam-trash mr-1"></i>
+                        Delete <span>Service</span>
+                      </a>
+                    </div>
+
+                    <div class="order-service-body p-3">
+                      <div class="row service_row" data-service-name="advanced">
+                        <div class="col-md-6 col-sm-12">
+                          <div class="photos-cont basic-photos-cont">
+                            <input
+                              class="photo-upload-input"
+                              data-service-name="advanced"
+                              type="file"
+                              id="advanced"
+                              name="advancedInput"
+                              multiple
+                              required
+                            />
+                            <div class="photos-bg">
+                              Drop your Photos here
+                              <div>Drag one set per time</div>
+                            </div>
+                            <div
+                              class="imgs_preview_container advanced_photos_container"
+                            ></div>
+                          </div>
+
+                          <div class="photos-cont services-refs-cont">
+                            <input
+                              class="photo-upload-input service_upload"
+                              id="advanced"
+                              type="file"
+                              data-service="1"
+                              name="refs_img[]"
+                              multiple
+                            />
+                            <div class="photos-bg">
+                              Drop your References here (optional)
+                              <div>Drag one set per time</div>
+                            </div>
+                            <div class="imgs_preview_container"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                          <textarea
+                            name="notes[]"
+                            id="advanced-ins"
+                            placeholder="Describe your requests briefly and in detail only according to the selected service."
+                            required
+                          ></textarea>
+
+                          <div class="p-1 form-group">
+                            <select
+                              name="advanced_service_time"
+                              class="form-control advanced_service_time"
+                              data-main-time-cost="2"
+                            >
+                              <option selected disabled>
+                                Select Turnaround Time...
+                              </option>
+                              <option
+                                value="24"
+                                data-selected-additional-cost="6"
+                              >
+                                for 24 hour
+                              </option>
+                              <option
+                                value="48"
+                                data-selected-additional-cost="2"
+                              >
+                                for 48 hour
+                              </option>
+                            </select>
+                          </div>
+
+                          <input
+                            type="hidden"
+                            name="advanced_files_count"
+                            class="uploaded-photos-count"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Proccess btn-->
+                  <div class="submit-btn-cont my-5" style="display: block">
+                    <button
+                      type="submit"
+                      class="btn submit-order-btn mx-auto justify-content-center align-items-center"
+                    >
+                      <span class="text">Proceed To Payment</span>
+                      <span class="spinner"></span>
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn submit-order-btn mx-auto justify-content-center align-items-center"
+                    >
+                      <span class="text">Proceed To Payment</span>
+                      <span class="spinner"></span>
+                    </button>
+                  </div>
+                  <!-- proccess btn-->
                 </div>
-                <!-- Proccess btn-->
-                <div class="submit-btn-cont my-5" style="display: block">
-                  <button
-                    type="submit"
-                    class="btn submit-order-btn mx-auto justify-content-center align-items-center"
-                  >
-                    <span class="text">Proceed To Payment</span>
-                    <span class="spinner"></span>
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn submit-order-btn mx-auto justify-content-center align-items-center"
-                  >
-                    <span class="text">Proceed To Payment</span>
-                    <span class="spinner"></span>
-                  </button>
-                </div>
-                <!-- proccess btn-->
-              </div>
-              <!-- Service Table -->
+
+                <!-- Service Table -->
+              </form>
             </div>
           </div>
           <!-- End Dynamic Content -->
@@ -449,10 +622,11 @@
     </div>
     <!-- End Footer -->
     <!-- End Dashboard Content -->
-    <script src="https://unpkg.com/jam-icons@2.0.0/js/jam-icons.min.js"></script>
+    <!-- <script src="https://unpkg.com/jam-icons@2.0.0/js/jam-icons.min.js"></script> -->
     <script src="resources/js/jquery-3.6.3.min.js"></script>
     <script src="resources/js/bootstrap.min.js" defer></script>
     <script src="resources/js/main.js" defer></script>
     <script src="resources/js/dashboard.js" defer></script>
+    <script src="resources/js/order.js" defer></script>
   </body>
 </html>

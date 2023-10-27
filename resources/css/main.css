@@ -533,13 +533,15 @@ body{
     justify-content: center;
     align-items: center;
     transition: 0.3s;
+    text-align:center;
 }
 .photos-bg div{
-    font-size: 17px;
+    font-size: 16px;
 }
 .services-refs-cont .photos-bg{
     color: #0d64d5;
     border: 3px dashed #0d64d5;
+    padding: 1rem;
 }
 .photos-cont:hover>.photos-bg{
     opacity: 1;
