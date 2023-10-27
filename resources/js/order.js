@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  let additionalCostPerPhoto = 0
+  // let additionalCostPerPhoto = 0
   let selectedAdditionalCostPerPhoto = 0
 
   const serviceRows = document.querySelectorAll('.service_row')
@@ -62,11 +62,13 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCostDependOnSelectedTime(serviceName)
       })
     })
+
+    deleteServiceOrder(serviceName)
   })
 
   function updatePhotosCount(serviceName) {
     const previewImgContainer = document.querySelector(
-      `.basic-photos-cont .${serviceName}_photos_container`
+      `.main-photos-cont .${serviceName}_photos_container`
     )
     const countInput = document.querySelector('.uploaded-photos-count')
 
@@ -99,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const additionalCostElement = document.querySelector(
         `.${serviceName}-additional-cost`
       )
-      
+
       let additionalCostPerPhoto = parseFloat(
         additionalCostElement.dataset.additionalCost
       )
@@ -136,6 +138,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
       additionalCostElement.dataset.additionalCost =
         selectedAdditionalCostPerPhoto
+
+      updatePhotosCost()
+    })
+  }
+
+  function deleteServiceOrder(serviceName) {
+    let deleteButton = document.querySelector(`.${serviceName}_delete_btn`)
+    deleteButton.addEventListener('click', function () {
+      let serviceOrder = document.querySelector(`#${serviceName}-cont`)
+      let tableServiceRow=document.querySelector(`#service-row-${serviceName}`)
+      serviceOrder.remove()
+      tableServiceRow.remove()
 
       updatePhotosCost()
     })

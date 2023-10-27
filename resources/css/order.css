@@ -73,3 +73,11 @@
 .delete-button:hover {
     background-color: #ff3838;
   }
+
+  .delete_btn{
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+  }
