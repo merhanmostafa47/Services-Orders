@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const previewImgContainer = document.querySelector(
       `.main-photos-cont .${serviceName}_photos_container`
     )
-    const countInput = document.querySelector('.uploaded-photos-count')
+    const countInput = document.querySelector(`.${serviceName}-photos-count`)
 
     let photosCount = previewImgContainer.childNodes.length
 
