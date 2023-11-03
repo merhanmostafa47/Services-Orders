@@ -1,0 +1,42 @@
+.navbar-nav .nav-item.active {
+  position: relative;
+}
+
+li.nav-item.active:after {
+  position: absolute;
+  content: '';
+  bottom: 8px;
+  height: 4px;
+  background: #e00000;
+  width: calc(100% - 16px);
+  inset-inline: 11%;
+}
+
+.fsection {
+  margin-bottom: 50px;
+}
+
+.feat .btnss {
+  display: flex;
+  align-items: center;
+}
+
+.feat .btnss button {
+  font-size: 15px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-indicators {
+  margin-bottom: -1rem;
+  margin-left: 0;
+}
+
+.mtt {
+  margin-left: 0;
+}
+
+.more_info .row {
+  row-gap: 1rem;
+}
