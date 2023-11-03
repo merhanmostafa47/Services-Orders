@@ -29,8 +29,9 @@ li.nav-item.active:after {
 }
 
 .carousel-indicators {
-  margin-bottom: -1rem;
+  margin-bottom: 1rem;
   margin-left: 0;
+  margin-right: 0;
 }
 
 .mtt {
@@ -39,4 +40,9 @@ li.nav-item.active:after {
 
 .more_info .row {
   row-gap: 1rem;
+}
+
+
+.fosectiontitle{
+  margin-left: 0;
 }
