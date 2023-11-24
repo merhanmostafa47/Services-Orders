@@ -405,3 +405,140 @@ header .main_menu .nav_item .page_name {
     text-align: center;
   }
 }
+
+/* second navbar */
+.sec_header {
+  border: none;
+  margin-bottom: 2rem;
+}
+.sec_header .sec_navbar .navbar {
+  overflow: unset;
+  padding-block: 1rem;
+  width: unset;
+  height: auto;
+}
+
+.sec_header .sec_navbar .container {
+  max-width: 1140px;
+}
+
+.sec_header .sec_navbar .navbar-collapse {
+  flex-grow: 0;
+}
+
+.sec_header .sec_navbar .navbar-toggler:focus {
+  box-shadow: none;
+}
+.sec_header .sec_navbar .dropdown-toggle::after {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .sec_header .sec_navbar .nav-link.dropdown-toggle:hover .dropdown-menu {
+    display: block;
+    position: absolute;
+  }
+}
+
+.sec_header .sec_navbar .navbar .navbar-brand {
+  block-size: 6rem;
+}
+
+@media (max-width: 991px) {
+  .sec_header .sec_navbar .navbar .navbar-brand {
+    block-size: 5rem;
+  }
+}
+.sec_header .sec_navbar .navbar .navbar-brand img {
+  max-block-size: 100%;
+}
+
+/* Second footer */
+.sec_footer {
+  background-color: #343a40;
+}
+
+.sec_footer .container {
+  max-width: 1140px;
+}
+.sec_footer p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.sec_footer .social_media_icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+
+.sec_footer .social_media_icons a {
+  width: 24px;
+  height: 24px;
+}
+
+.sec_footer .social_media_icons a img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.sec_footer h5 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+.sec_footer .links_list {
+  padding: 0;
+}
+.sec_footer .links_list li {
+  list-style: none;
+  margin-bottom: 0.5rem;
+}
+
+.sec_footer .links_list li a {
+  font-size: 14px;
+  text-decoration: none;
+  color: white;
+  text-transform: capitalize;
+  transition: all 0.3s ease-in-out;
+}
+
+.sec_footer .links_list li a:hover {
+  color: #aaa;
+}
+
+.sec_footer .email_address {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sec_footer .email_address i {
+  font-size: 28px;
+  color: red;
+}
+
+.sec_footer .email_address a {
+  color: #909090;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.sec_footer .copyright p {
+  background-color: #191919;
+  color: white;
+  padding: 8px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.sec_footer .copyright a {
+  text-decoration: none;
+  color: #aaa;
+}
+
+.sec_footer .copyright a:hover {
+  color: #909090;
+  transition: all 0.3s ease-in-out;
+}
