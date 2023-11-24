@@ -184,10 +184,14 @@ header {
 
 header .logo {
   max-block-size: 100px;
-  max-width: fit-content;
+width: 10rem;
+}
+
+header .logo img {
+max-width: 100%;
+  max-block-size: 100%;
 }
 header .navbar {
-  width: 1000px;
   height: 94px;
   overflow-y: hidden;
   margin: auto;
@@ -210,6 +214,7 @@ header .main_menu .nav_item {
   cursor: pointer;
   min-width: 120px;
   position: relative;
+  padding-inline: .6rem;
 }
 
 header .main_menu .nav_item:nth-of-type(1) {
