@@ -16,6 +16,9 @@ li.nav-item.active:after {
   min-block-size: 84vh;
 }
 
+.ele {
+  margin-top: 0;
+}
 .fsection {
   margin-bottom: 36px;
   margin-top: 36px;
@@ -199,7 +202,7 @@ header .logo img {
   height: auto;
 }
 header .navbar {
-  height: 103px;
+  height: 95px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -556,6 +559,7 @@ header .main_menu .nav_item .page_name {
   transition: all 0.3s ease-in-out;
 }
 
+/* FAQ , Terms , Privacy , About Pages */
 .data_box {
   display: flex;
   justify-content: flex-start;
@@ -578,4 +582,312 @@ header .main_menu .nav_item .page_name {
   line-height: 1.8;
   color: #666666;
   font-size: 16px;
+}
+
+/* Register  & login btn */
+.register-form .form-btn,
+.main_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  border: 2px solid #e00000;
+  padding: 7px 14px;
+  text-decoration: none;
+  width: 157px;
+  position: relative;
+  border-radius: 0;
+  font-size: 18px;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.register-form .form-btn::after,
+.main_btn::after {
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(45deg) scale(0, 1);
+  position: absolute;
+  content: "";
+  background: #e00000;
+  z-index: -1;
+  transition: all 0.5s ease-in-out;
+}
+
+button.form-btn:hover span,
+.main_btn:hover {
+  color: white;
+  text-decoration: underline;
+}
+.register-form .form-btn:hover::after,
+.main_btn:hover::after {
+  transform: skewX(25deg) scale(1, 1);
+}
+
+/* Icons section */
+.trowsection .service-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Faq page */
+.page_title {
+  color: #333;
+  margin-block-end: 1.25rem;
+  text-align: start;
+}
+.page_title::after {
+  content: "";
+  width: 60px;
+  border-bottom: 2px solid #e00000;
+  display: block;
+}
+
+.faq_section_wrapper .accordion-button {
+  margin: 0;
+}
+.faq_section_wrapper .accordion-button::after {
+  background-color: none;
+  position: unset;
+}
+
+.faq_section_wrapper .accordion-button:not(.collapsed) {
+  color: #e00000;
+  background-color: rgb(224 0 0 / 10%);
+  box-shadow: none;
+}
+
+.faq_section_wrapper .accordion-button:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.faq_section_wrapper .accordion-button:hover {
+  color: #e00000;
+}
+
+.faq_section_wrapper .accordion-button:not(.collapsed)::after {
+  filter: brightness(0) saturate(100%) invert(9%) sepia(90%) saturate(6176%)
+    hue-rotate(359deg) brightness(101%) contrast(112%);
+}
+
+.faq_section_wrapper .accordion-body {
+  color: #666666;
+}
+
+/* Pricing page */
+.heading-title {
+  margin-bottom: 50px;
+}
+
+.pricingTable {
+  border: 2px solid #e3e3e3;
+  text-align: center;
+  position: relative;
+  padding-bottom: 40px;
+  transform: translateZ(0px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pricingTable:before,
+.pricingTable:after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  bottom: -2px;
+  right: -2px;
+  z-index: -1;
+  transition: all 0.5s ease 0s;
+}
+
+.pricingTable:before {
+  border-right: 2px solid #e00000;
+  border-left: 2px solid #e00000;
+  transform: scaleY(0);
+  transform-origin: 100% 0 0;
+}
+
+.pricingTable:after {
+  border-bottom: 2px solid #e00000;
+  border-top: 2px solid #e00000;
+  transform: scaleX(0);
+  transform-origin: 0 100% 0;
+}
+
+.pricingTable:hover:before {
+  transform: scaleY(1);
+}
+
+.pricingTable:hover:after {
+  transform: scaleX(1);
+}
+
+.pricingTable .pricingTable-header {
+  color: #343a40;
+  margin: -2px -2px 0;
+  padding: 20px 0;
+  inline-size: 100%;
+  border-block-end: 2px solid #e3e3e3;
+}
+.pricingTable:hover  .pricingTable-header{
+ border-color: #e00000;
+}
+.pricingTable .heading {
+  font-size: 30px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+
+.pricingTable .subtitle {
+  font-size: 14px;
+  display: block;
+}
+
+.pricingTable .price-value {
+  font-size: 56px;
+    color: #e00000;
+  font-weight: 600;
+  margin-top: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.pricingTable .currency {
+  font-size: 32px;
+    color: #e00000;
+  font-weight: normal;
+  position: absolute;
+  top: 2px;
+  left: -30px;
+}
+
+.pricingTable .month {
+  font-size: 20px;
+    color: #e00000;
+  position: absolute;
+  bottom: 17px;
+  right: -40px;
+}
+
+.pricingTable .pricing-content {
+  list-style: circle;
+  list-style-position: inside;
+  padding: 0;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  inline-size: 100%;
+}
+
+.pricing_examples {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-block: 1rem 12px;
+}
+.pricing_examples a {
+  display: block;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+.pricing_examples img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pricingTable .see_examples {
+  font-size: 14px;
+  color: #e00000;
+  text-transform: capitalize;
+  display: block;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.pricingTable .see_examples:hover {
+  text-decoration: underline;
+}
+.pricingTable .pricing-content li {
+  font-size: 16px;
+  color: #7a7e82;
+  line-height: 36px;
+  text-align: start;
+  padding-inline: 1.5rem;
+}
+
+@media screen and (max-width: 990px) {
+  .pricingTable {
+    margin-bottom: 25px;
+  }
+  .pricingTable .pricing-content li {
+    padding-inline: 1rem;
+  }
+}
+
+.pricing_section_wrapper .swiper-pagination {
+  bottom: 0 !important;
+}
+
+@media (max-width: 991px) {
+  .pricing_section_wrapper .swiper-button-next:after,
+  .pricing_section_wrapper .swiper-button-prev:after  {
+  display: none;
+  }
+}
+.pricing_section_wrapper .swiper-wrapper {
+  margin-block-end: 1.5rem;
+}
+
+.pricing_section_wrapper .swiper-pagination-bullet-active {
+  background-color: #e00000;
+}
+
+.pricing_section_wrapper .swiper-button-next:after,
+.pricing_section_wrapper .swiper-button-prev:after {
+  filter: brightness(0) saturate(100%) invert(9%) sepia(90%) saturate(6176%)
+    hue-rotate(359deg) brightness(101%) contrast(112%);
+}
+/* Carousel */
+.carousel {
+  inline-size: 500px;
+  position: relative;
+}
+
+.compare-container {
+  position: relative;
+  width: 100%;
+}
+
+.compare-image {
+  width: 50%;
+  position: absolute;
+  top: 0;
+  display: block;
+}
+
+.compare-image:nth-of-type(2) {
+  left: 50%;
+}
+
+.compare-slider {
+  position: absolute;
+  z-index: 2;
+  width: 5px; /* Width of the slider */
+  height: 100%;
+  background: #000; /* Color of the slider */
+  cursor: ew-resize;
+  left: 50%;
 }
