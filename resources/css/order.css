@@ -38,19 +38,21 @@
   height: auto;
 }
 
-.preview-image-container  img{
+.preview-image-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  transition: opacity 1s ease; 
 }
 
 .progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  height: 10px;
-  background-color: #ccc;
+  height: 4px;
+  background-color: #0074d9; /* Change the color as needed */
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .delete-button {
@@ -62,7 +64,7 @@
   color: white;
   padding: 0 6px;
   cursor: pointer;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   border-radius: 50%;
   height: 22px;
   width: 22px;
@@ -71,13 +73,13 @@
   align-items: center;
 }
 .delete-button:hover {
-    background-color: #ff3838;
-  }
+  background-color: #ff3838;
+}
 
-  .delete_btn{
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    transition: all .3s ease-in-out;
-  }
+.delete_btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
