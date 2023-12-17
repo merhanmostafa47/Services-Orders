@@ -738,8 +738,8 @@ button.form-btn:hover span,
   inline-size: 100%;
   border-block-end: 2px solid #e3e3e3;
 }
-.pricingTable:hover  .pricingTable-header{
- border-color: #e00000;
+.pricingTable:hover .pricingTable-header {
+  border-color: #e00000;
 }
 .pricingTable .heading {
   font-size: 30px;
@@ -754,7 +754,7 @@ button.form-btn:hover span,
 
 .pricingTable .price-value {
   font-size: 56px;
-    color: #e00000;
+  color: #e00000;
   font-weight: 600;
   margin-top: 10px;
   position: relative;
@@ -763,7 +763,7 @@ button.form-btn:hover span,
 
 .pricingTable .currency {
   font-size: 32px;
-    color: #e00000;
+  color: #e00000;
   font-weight: normal;
   position: absolute;
   top: 2px;
@@ -772,7 +772,7 @@ button.form-btn:hover span,
 
 .pricingTable .month {
   font-size: 20px;
-    color: #e00000;
+  color: #e00000;
   position: absolute;
   bottom: 17px;
   right: -40px;
@@ -828,7 +828,7 @@ button.form-btn:hover span,
 
 .pricingTable .pricing-content li span {
   color: #e00000;
-  margin-inline: 1rem .5rem;
+  margin-inline: 1rem 0.5rem;
   font-weight: 700;
 }
 @media screen and (max-width: 990px) {
@@ -843,8 +843,8 @@ button.form-btn:hover span,
 
 @media (max-width: 991px) {
   .pricing_section_wrapper .swiper-button-next:after,
-  .pricing_section_wrapper .swiper-button-prev:after  {
-  display: none;
+  .pricing_section_wrapper .swiper-button-prev:after {
+    display: none;
   }
 }
 .pricing_section_wrapper .swiper-wrapper {
@@ -859,6 +859,38 @@ button.form-btn:hover span,
 .pricing_section_wrapper .swiper-button-prev:after {
   filter: brightness(0) saturate(100%) invert(9%) sepia(90%) saturate(6176%)
     hue-rotate(359deg) brightness(101%) contrast(112%);
+}
+
+/* thanks page */
+
+.thanks_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-block: 1.5rem;
+}
+
+.thanks_content .title {
+  font-size: 1.25rem;
+  color: #e00000;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.thanks_content .description {
+  inline-size: 60%;
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .thanks_content .description {
+    inline-size: 90%;
+  }
 }
 /* Carousel */
 .carousel {
