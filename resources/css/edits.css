@@ -779,8 +779,7 @@ button.form-btn:hover span,
 }
 
 .pricingTable .pricing-content {
-  list-style: circle;
-  list-style-position: inside;
+  list-style: none;
   padding: 0;
   margin-bottom: 30px;
   display: flex;
@@ -825,15 +824,16 @@ button.form-btn:hover span,
   color: #7a7e82;
   line-height: 36px;
   text-align: start;
-  padding-inline: 1.5rem;
 }
 
+.pricingTable .pricing-content li span {
+  color: #e00000;
+  margin-inline: 1rem .5rem;
+  font-weight: 700;
+}
 @media screen and (max-width: 990px) {
   .pricingTable {
     margin-bottom: 25px;
-  }
-  .pricingTable .pricing-content li {
-    padding-inline: 1rem;
   }
 }
 
