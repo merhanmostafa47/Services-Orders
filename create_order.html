@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Dashboard</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/jam-icons/css/jam.min.css" />
+    <script src="https://unpkg.com/jam-icons/js/jam.min.js"></script>
+    <link rel="stylesheet" href="resources/css/jam.min.css" />
+    <link rel="stylesheet" href="resources/css/app.css" />
+    <link rel="stylesheet" href="resources/css/main.css" />
+    <link rel="stylesheet" href="resources/css/order.css" />
+    <link rel="stylesheet" href="resources/css/edits.css" />
+  </head>
+  <body>
+    <!-- Start Navbar -->
+    <nav class="p-navbar navbar navbar-expand-lg navbar-light">
+      <div class="p-0 container-fluid">
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="resources/img/logo.png"
+            class="align-top d-inline-block"
+            alt="Photorelive | Photo Retouching Service | Old Photo Restoration Service"
+          />
+        </a>
+        <i class="jam jam-menu navbar-toggler-btn"></i>
+        <!-- Start Left Menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav main-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="#" title="Photo Retouching Prices"
+                >Prices & Samples</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+        <!-- End Left Menu -->
+        <!-- Start Right Menu -->
+        <ul class="navbar-nav d-flex align-items-center">
+          <li class="nav-item dropdown userlogin-dropdown account-collapse">
+            <a class="nav-link navbar-profile-dropdown">
+              <div class="user-avatar">Ms</div>
+              Mostafa Ali .
+              <i class="ml-1 fa fa-chevron-down"></i>
+            </a>
+            <div
+              class="user-dropdown dropdown-menu-right"
+              id="account-collapse"
+            >
+              <div class="my-shadow">
+                <a class="dropdown-item" href="#">Dashboard</a>
+                <a class="dropdown-item" href="#">Sign-Out</a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item my-btn">
+            <a class="nav-link order-now-link" href="#">Order Now</a>
+            <div class="my-btn-bg"></div>
+          </li>
+        </ul>
+        <!-- End Right Menu -->
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <!-- Start Content -->
+    <div class="container-fluid dashboard-container">
+      <div class="row">
+        <!-- Start Sidebar -->
+        <div class="col-12 col-sm-4 col-md-3 nop">
+          <div class="sidebar">
+            <div class="user-avatar large-avatar">MS</div>
+            <div class="user-title">Welcome, mostafa</div>
+            <div class="user-email">mo@gmail.com</div>
+            <div class="my-btn order-now-btn-mob">
+              <a class="nav-link order-now-link" href="#">Order Now</a>
+              <div class="my-btn-bg"></div>
+            </div>
+          </div>
+        </div>
+        <!-- End Sidebar -->
+        <!-- Start Dashboard -->
+        <div class="col-12 col-sm-8 col-md-9">
+          <h1 class="page_title px-4 mt-3">create order</h1>
+          <!-- Start Dynamic Content -->
+          <div class="dashboard-contents py-0">
+            <div class="contents create-order-cont">
+              <div class="oredr-id">Order <span>#33333</span></div>
+
+              <form>
+                <!-- Start Table -->
+                <table class="w-100 services-summary mt-3 table d-none">
+                  <tr class="head">
+                    <td width="20%">Selected Services</td>
+                    <td width="20%">Cost/Photo</td>
+                    <td width="20%">No. of Photo(s)</td>
+                    <td width="20%">Turnaround Time</td>
+                    <td width="20%">Service(s) Cost</td>
+                  </tr>
+                  <tr
+                    class="table-row"
+                    style="display: table-row"
+                    id="service-row-basic"
+                  >
+                    <td
+                      class="selectedService basic_selected_service"
+                      class="text-left"
+                      width="20%"
+                      data-service-name="basic"
+                      data-service-price="50"
+                    >
+                      Basic
+                    </td>
+
+                    <!-- service cost -->
+                    <td class="image-cost" width="20%">$50</td>
+
+                    <!-- photos count -->
+                    <td
+                      class="basic-photos-no"
+                      width="20%"
+                      data-service-name="basic"
+                    >
+                      0
+                    </td>
+
+                    <!-- additional cost per photo -->
+                    <td
+                      class="basic-additional-cost"
+                      width="20%"
+                      data-additional-cost="0"
+                    >
+                      -
+                    </td>
+
+                    <!--  total photos cost  -->
+                    <td
+                      class="service-price"
+                      width="20%"
+                      id="service-price-basic"
+                    ></td>
+                  </tr>
+
+                  <tr class="head">
+                    <td colspan="4">Grand Total</td>
+                    <td colspan="1" id="total-price" class="total-price"></td>
+                  </tr>
+                </table>
+                <!-- End Table -->
+                <!-- Service Table -->
+                <div class="service_media_details">
+                  <!-- Basic service -->
+                  <div class="order-service active" id="basic-cont">
+                    <div class="order-service-body p-3">
+                      <div class="row service_row" data-service-name="basic">
+                        <div class="col-md-6 col-sm-12">
+                          <div class="photos-cont main-photos-cont">
+                            <input
+                              class="photo-upload-input"
+                              data-service-name="basic"
+                              type="file"
+                              id="basic"
+                              data-service="1"
+                              name="basic_img"
+                              multiple
+                              required
+                            />
+                            <div class="photos-bg">
+                              Drop your Photos here
+                              <div>Drag one set per time</div>
+                            </div>
+                            <div
+                              class="imgs_preview_container basic_photos_container"
+                            ></div>
+                          </div>
+
+                          <div class="photos-cont services-refs-cont">
+                            <input
+                              class="photo-upload-input service_upload"
+                              id="basic"
+                              type="file"
+                              data-service="1"
+                              name="refs_img[]"
+                              multiple
+                            />
+                            <div class="photos-bg">
+                              Drop your References here (optional)
+                              <div>Drag one set per time</div>
+                            </div>
+                            <div class="imgs_preview_container"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                          <textarea
+                            name="notes[]"
+                            id="basic-ins"
+                            placeholder="Describe your requests carefully"
+                            required
+                          ></textarea>
+
+                          <input
+                            type="hidden"
+                            name="basic_files_count"
+                            class="basic-photos-count"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Proccess btn-->
+                  <div class="submit-btn-cont my-5" style="display: block">
+                    <button
+                      type="submit"
+                      class="btn submit-order-btn mx-auto justify-content-center align-items-center"
+                    >
+                      <span class="text">Submit</span>
+                      <span class="spinner"></span>
+                    </button>
+                  </div>
+                  <!-- proccess btn-->
+                </div>
+
+                <!-- Service Table -->
+              </form>
+            </div>
+          </div>
+          <!-- End Dynamic Content -->
+        </div>
+        <!-- End Dashboard -->
+      </div>
+    </div>
+    <!-- End Content -->
+
+    <!-- footer -->
+    <footer>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-12 footer-logo">
+            <a href="#">
+              <img
+                src="resources/img/logo.png"
+                alt="Photorelive | Photo Retouching Service | Old Photo Restoration Service"
+              />
+            </a>
+          </div>
+          <div class="col-12">
+            <ul>
+              <li>
+                <a href="#" title="Photo Retouching Services">Services</a>
+              </li>
+              <li>
+                <a href="#" title="Photo Retouching Prices">Prices & Samples</a>
+              </li>
+              <li>
+                <a href="#" title="Retouch Service Terms">Terms & Privacy</a>
+              </li>
+              <li>
+                <a href="#">Blog</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="text-center col-12 copyrights">
+        &copy; 2008 - 2023 Photorelive. All right Reserved.
+      </div>
+    </footer>
+
+    <div class="scrolltop-btn">
+      <i class="jam jam-chevron-up"></i>
+    </div>
+    <!-- End Footer -->
+    <!-- End Dashboard Content -->
+    <!-- <script src="https://unpkg.com/jam-icons@2.0.0/js/jam-icons.min.js"></script> -->
+    <script src="resources/js/jquery-3.6.3.min.js"></script>
+    <script src="resources/js/bootstrap.min.js" defer></script>
+    <script src="resources/js/main.js" defer></script>
+    <script src="resources/js/dashboard.js" defer></script>
+    <script src="resources/js/order.js" defer></script>
+  </body>
+</html>
