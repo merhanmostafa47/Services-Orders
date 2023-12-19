@@ -64,10 +64,15 @@ li.nav-item.active:after {
   align-items: center;
 }
 
-.fosection .btnss button,
-.feat .btnss button {
+.btnss button {
+  color: black;
+  border: red solid 2px;
+  padding: 14px;
+  width: 10rem;
+  margin: 7px;
+  font-weight: 500;
   font-size: 15px !important;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 }
@@ -232,8 +237,8 @@ header .logo {
 }
 
 header .logo img {
-  width: 10rem;
-  height: auto;
+  width: 10rem !important;
+  height: auto !important;
 }
 header .navbar {
   height: 95px;
@@ -307,7 +312,7 @@ header .main_menu .nav_item:before {
 }
 header .main_menu .nav_item.active::after,
 header .main_menu .nav_item:hover::after {
-  bottom: -4px;
+  bottom: -5px;
 }
 header .main_menu .nav_item.active::before,
 header .main_menu .nav_item:hover::before {
@@ -325,6 +330,8 @@ header .main_menu .nav_item .nav_link {
   font-size: 18px;
   display: block;
   color: currentColor;
+  position: relative;
+  z-index: 2;
 }
 
 header .main_menu .nav_item .page_name {
@@ -601,6 +608,8 @@ header .main_menu .nav_item .page_name {
   align-items: flex-start;
   border-radius: 6px;
   padding: 32px;
+  background-color: #fff;
+  border: 1px solid #ccc;
 }
 
 .data_box .box_title {
@@ -687,7 +696,7 @@ button.form-btn:hover span,
   margin: 0;
 }
 .faq_section_wrapper .accordion-button::after {
-  background-color: none;
+  background-color: transparent;
   position: unset;
 }
 
