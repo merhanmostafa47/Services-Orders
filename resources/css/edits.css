@@ -16,6 +16,40 @@ li.nav-item.active:after {
   min-block-size: 84vh;
 }
 
+.form-control {
+  padding: 6px 15px;
+  margin-bottom: 12px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  outline: 0;
+  box-shadow: none;
+  color: #555;
+}
+
+.form-control:focus {
+  border: 1px solid #e00000;
+  outline: 0;
+  box-shadow: none;
+}
+
+.form-control::placeholder {
+  color: #bbb;
+  opacity: 1;
+}
+
+.add_service_link {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(224, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+  text-transform: capitalize;
+}
+
+.add_service_link:hover {
+  color: rgba(224, 0, 0, 1);
+}
+
 .ele {
   margin-top: 0;
 }
@@ -640,6 +674,7 @@ button.form-btn:hover span,
   color: #333;
   margin-block-end: 1.25rem;
   text-align: start;
+  text-transform: capitalize;
 }
 .page_title::after {
   content: "";
