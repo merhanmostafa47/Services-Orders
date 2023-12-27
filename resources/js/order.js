@@ -12,20 +12,19 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     // Upload photos and show it in preview with delete button
+
     fileInputs.forEach((input) => {
       input.addEventListener("change", function () {
         const selectedFiles = this.files;
 
-        const previewContainer = this.parentNode.querySelector(
-          ".imgs_preview_container"
-        );
-
         for (const element of selectedFiles) {
           const file = element;
           const reader = new FileReader();
+
           reader.onload = function (e) {
             const imgElement = new Image();
             imgElement.onload = function () {
+              // Create canvas and resize image
               const canvas = document.createElement("canvas");
               const ctx = canvas.getContext("2d");
               canvas.width = 100;
@@ -40,37 +39,42 @@ document.addEventListener("DOMContentLoaded", function () {
               previewImgElement.src = resizedDataUrl;
               previewImgContainer.appendChild(previewImgElement);
 
-              // ===============================
               // Progress Bar
               const progressBar = document.createElement("div");
               progressBar.classList.add("progress-bar");
-              progressBar.style.width = "0%"; // Initialize progress bar
+              progressBar.style.width = "0%";
               previewImgContainer.appendChild(progressBar);
-              // Gradually increase the progress bar
-              let progress = 0;
-              const interval = setInterval(function () {
-                progress += 5; // Increment progress
-                progressBar.style.width = progress + "%";
-                if (progress >= 100) {
-                  clearInterval(interval);
+
+              // AJAX request for file upload
+              const formData = new FormData();
+              formData.append("file", file);
+              const xhr = new XMLHttpRequest();
+              xhr.open("POST", "endpoint url");
+
+              // Upload progress event
+              xhr.upload.addEventListener("progress", function (e) {
+                if (e.lengthComputable) {
+                  const percentComplete = (e.loaded / e.total) * 100;
+                  progressBar.style.width = percentComplete + "%";
                 }
-              }, 200); // Adjust the interval time as per your upload simulation
-
-              // Image element with opacity
-              previewImgElement.style.opacity = 0.5;
-              previewImgContainer.appendChild(previewImgElement);
-
-              // Remove progress bar when image is fully loaded
-              previewImgElement.addEventListener("load", function () {
-                clearInterval(interval); // Stop the interval
-                progressBar.style.width = "100%"; // Set progress bar to full
-                setTimeout(function () {
-                  progressBar.style.display = "none"; // Hide progress bar
-                  previewImgElement.style.opacity = 1;
-                }, 500); // Adjust the timeout as needed
               });
 
-              // ==========================================================
+              // File uploaded and response received
+              xhr.onload = function () {
+                if (xhr.status === 200) {
+                  progressBar.style.width = "100%";
+                  setTimeout(function () {
+                    progressBar.style.display = "none"; // Hide progress bar after upload
+                  }, 500);
+                } else {
+                  progressBar.style.backgroundColor = "red";
+                }
+              };
+
+              // Send the FormData object with the file
+              xhr.send(formData);
+
+              // Delete Button
               const deleteButton = document.createElement("button");
               deleteButton.classList.add("delete-button");
               deleteButton.innerHTML = "x";
@@ -93,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
         updateCostDependOnSelectedTime(serviceName);
       });
     });
-
     deleteServiceOrder(serviceName);
   });
 
