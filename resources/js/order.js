@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     fileInputs.forEach((input) => {
       input.addEventListener("change", function () {
         const selectedFiles = this.files;
-
+        const previewContainer = this.parentNode.querySelector(
+          ".imgs_preview_container"
+        );
         for (const element of selectedFiles) {
           const file = element;
           const reader = new FileReader();
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
               const formData = new FormData();
               formData.append("file", file);
               const xhr = new XMLHttpRequest();
-              xhr.open("POST", "endpoint url");
+              xhr.open("POST", "https://photo.tag-soft.com/client/dashboard/orders/100/update_details");
 
               // Upload progress event
               xhr.upload.addEventListener("progress", function (e) {
