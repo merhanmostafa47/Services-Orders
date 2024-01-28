@@ -242,7 +242,7 @@ header .logo img {
 }
 header .navbar {
   height: 95px;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -263,6 +263,16 @@ header .main_menu .nav_item {
   min-width: 120px;
   position: relative;
   padding-inline: 0.6rem;
+  overflow: hidden;
+}
+
+header .main_menu .nav_item.dropdown {
+  overflow: unset;
+}
+
+header .main_menu .nav_item.dropdown:after,
+header .main_menu .nav_item.dropdown:before {
+  display: none;
 }
 
 header .main_menu .nav_item:nth-of-type(1) {
@@ -350,7 +360,7 @@ header .main_menu .nav_item .page_name {
     flex-direction: column;
     height: auto;
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     justify-content: center;
   }
   header .main_menu {
