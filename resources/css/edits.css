@@ -639,7 +639,8 @@ header .main_menu .nav_item .page_name {
 
 /* Register  & login btn */
 .register-form .form-btn,
-.main_btn {
+.main_btn,
+.secondary_btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -647,6 +648,8 @@ header .main_menu .nav_item .page_name {
   border: 2px solid #e00000;
   padding: 7px 14px;
   text-decoration: none;
+  text-transform: capitalize;
+  text-align: center;
   width: 157px;
   position: relative;
   border-radius: 0;
@@ -655,6 +658,13 @@ header .main_menu .nav_item .page_name {
   overflow: hidden;
 }
 
+.secondary_btn {
+  background-color: #e00000;
+  &:hover {
+    color: white;
+    text-decoration: underline;
+  }
+}
 .register-form .form-btn::after,
 .main_btn::after {
   left: -20%;
@@ -974,7 +984,7 @@ button.form-btn:hover span,
   .serices_filter {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 1.25rem;
     margin-block: 1.5rem;
@@ -985,7 +995,7 @@ button.form-btn:hover span,
       text-transform: capitalize;
       transition: all 0.3s ease-in-out;
       font-weight: 600;
-      font-size: 1.15rem;
+      font-size: 1rem;
       cursor: pointer;
 
       &:hover {
@@ -1001,9 +1011,24 @@ button.form-btn:hover span,
     }
   }
 
+  .examples_price {
+    color: #666;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
   .service_examples {
+    margin-block-end: 3rem;
+
     .service_example {
       block-size: 15rem;
+      margin-block-end: 24px;
       position: relative;
       overflow: hidden;
       transition: all 0.4s ease-in-out;
@@ -1032,6 +1057,38 @@ button.form-btn:hover span,
       }
     }
   }
+
+  .btns_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .main_btn {
+      min-width: fit-content;
+    }
+  }
+
+  .more_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    color: #212529;
+
+    h3 {
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    p {
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -1047,7 +1104,15 @@ button.form-btn:hover span,
 header .main_menu .nav_item.nav_item--megamenue {
   position: static;
 
+  &:hover {
+    .megamenu {
+      display: block;
+    }
+  }
   .megamenu {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #ccc;
     position: absolute;
     width: 85%;
     top: 94px;
@@ -1055,7 +1120,8 @@ header .main_menu .nav_item.nav_item--megamenue {
     right: 0;
     padding: 0;
     margin: auto;
-
+    display: none;
+    z-index: 10;
     .row {
       padding: 0.5rem;
       width: 100%;
