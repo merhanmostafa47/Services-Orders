@@ -1044,6 +1044,24 @@ button.form-btn:hover span,
   }
 }
 
+
+.preview-image-container {
+  position: relative; /* Needed for absolute positioning of children */
+  width: 100%; /* Ensure this matches your layout needs */
+  /* Other styling as needed */
+}
+
+.progress-bar {
+  height: 20px; /* Height of the progress bar */
+  background-color: #4CAF50; /* Green background */
+  width: 0%; /* Initial width of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; /* Smooth transition for width changes */
+  position: absolute; /* Positioned inside the container */
+  top: 10px;
+  left: 0;
+}
+
 /* Carousel */
 .carousel {
   inline-size: 500px;
