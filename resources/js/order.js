@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // let additionalCostPerPhoto = 0
   let selectedAdditionalCostPerPhoto = 0;
-
+  let progressBar = null;
   const serviceRows = document.querySelectorAll(".service_row");
 
   serviceRows.forEach(function (row) {
@@ -39,47 +39,17 @@ document.addEventListener("DOMContentLoaded", function () {
               const previewImgContainer = document.createElement("div");
               previewImgContainer.classList.add("preview-image-container");
 
+              // Create and append the progress bar to the preview container
+              const progressBarContainer = document.createElement("div");
+              progressBarContainer.classList.add("progress-bar-container");
+              progressBar = document.createElement("div");
+              progressBar.classList.add("progress-bar");
+              progressBarContainer.appendChild(progressBar);
+              previewImgContainer.appendChild(progressBarContainer);
+
               const previewImgElement = document.createElement("img");
               previewImgElement.src = resizedDataUrl;
               previewImgContainer.appendChild(previewImgElement);
-
-              // Progress Bar
-              const progressBar = document.createElement("div");
-              progressBar.classList.add("progress-bar");
-              progressBar.style.width = "0%";
-              previewImgContainer.appendChild(progressBar);
-
-              // AJAX request for file upload
-              const formData = new FormData();
-              formData.append("file", file);
-              const xhr = new XMLHttpRequest();
-              xhr.open(
-                "POST",
-                "https://photo.tag-soft.com/client/dashboard/orders/100/update_details"
-              );
-
-              // Upload progress event
-              xhr.upload.addEventListener("progress", function (e) {
-                if (e.lengthComputable) {
-                  const percentComplete = (e.loaded / e.total) * 100;
-                  progressBar.style.width = percentComplete + "%";
-                }
-              });
-
-              // File uploaded and response received
-              xhr.onload = function () {
-                if (xhr.status === 200) {
-                  progressBar.style.width = "100%";
-                  setTimeout(function () {
-                    progressBar.style.display = "none"; // Hide progress bar after upload
-                  }, 500);
-                } else {
-                  progressBar.style.backgroundColor = "red";
-                }
-              };
-
-              // Send the FormData object with the file
-              xhr.send(formData);
 
               // Delete Button
               const deleteButton = document.createElement("button");
@@ -97,6 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
             };
             imgElement.src = e.target.result;
           };
+          uploadFile(file, progressBar);
+          // Now start the upload process
           reader.readAsDataURL(file);
         }
 
@@ -196,5 +168,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
       updatePhotosCost();
     });
+  }
+
+  function uploadFile(file, progressBar) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open(
+      "POST",
+      "https://photo.tag-soft.com/client/dashboard/orders/100/update_details"
+    );
+
+    // Upload progress event
+    xhr.upload.addEventListener("progress", function (e) {
+      if (e.lengthComputable) {
+        const percentComplete = (e.loaded / e.total) * 100;
+        progressBar.style.width = percentComplete + "%";
+      }
+    });
+
+    // File uploaded and response received
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        progressBar.style.width = "100%";
+        setTimeout(function () {
+          progressBar.style.display = "none"; // Optionally hide progress bar after upload
+        }, 500);
+      } else {
+        progressBar.style.backgroundColor = "red"; // Indicate error
+      }
+    };
+
+    // Send the FormData object with the file
+    xhr.send(formData);
   }
 });
